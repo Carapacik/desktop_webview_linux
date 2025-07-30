@@ -1,5 +1,4 @@
 #include "include/desktop_webview_linux/desktop_webview_linux_plugin.h"
-
 #include <flutter_linux/flutter_linux.h>
 #include <gtk/gtk.h>
 #include <webkit2/webkit2.h>
@@ -11,21 +10,6 @@
 
 #include "message_channel_plugin.h"
 #include "webview_window.h"
-
-namespace {
-    int64_t next_window_id_ = 0;
-
-    WebviewWindow *
-    get_window_or_error(DesktopWebviewLinuxPlugin *self, FlMethodCall *call, FlValue *args) {
-        auto window_id = fl_value_get_int(fl_value_lookup_string(args, "viewId"));
-        auto it = self->windows->find(window_id);
-        if (it == self->windows->end()) {
-            fl_method_call_respond_error(call, "0", "viewId not found", nullptr, nullptr);
-            return nullptr;
-        }
-        return it->second.get();
-    }
-}
 
 #define DESKTOP_WEBVIEW_LINUX_PLUGIN(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST((obj), desktop_webview_linux_plugin_get_type(), \
@@ -39,6 +23,21 @@ struct _DesktopWebviewLinuxPlugin {
 
 G_DEFINE_TYPE(DesktopWebviewLinuxPlugin, desktop_webview_linux_plugin, g_object_get_type()
 )
+
+namespace {
+    int64_t next_window_id_ = 0;
+
+    WebviewWindow *
+    get_window_or_error(DesktopWebviewLinuxPlugin * self, FlMethodCall * call, FlValue * args) {
+        auto window_id = fl_value_get_int(fl_value_lookup_string(args, "viewId"));
+        auto it = self->windows->find(window_id);
+        if (it == self->windows->end()) {
+            fl_method_call_respond_error(call, "0", "viewId not found", nullptr, nullptr);
+            return nullptr;
+        }
+        return it->second.get();
+    }
+}
 
 static void desktop_webview_linux_plugin_handle_method_call(
         DesktopWebviewLinuxPlugin * self, FlMethodCall * method_call) {
