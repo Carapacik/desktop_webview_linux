@@ -1,6 +1,6 @@
 name: desktop_webview_linux
 description: "Webview on Linux using webkit2gtk. desktop_webview_window only Linux part."
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/Carapacik/desktop_webview_linux
 topics:
   - webview
