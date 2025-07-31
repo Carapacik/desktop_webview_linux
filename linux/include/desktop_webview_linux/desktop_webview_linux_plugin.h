@@ -13,13 +13,13 @@ G_BEGIN_DECLS
 
 typedef struct _DesktopWebviewLinuxPlugin DesktopWebviewLinuxPlugin;
 typedef struct {
-  GObjectClass parent_class;
+    GObjectClass parent_class;
 } DesktopWebviewLinuxPluginClass;
 
 FLUTTER_PLUGIN_EXPORT GType desktop_webview_linux_plugin_get_type();
 
 FLUTTER_PLUGIN_EXPORT void desktop_webview_linux_plugin_register_with_registrar(
-    FlPluginRegistrar* registrar);
+        FlPluginRegistrar *registrar);
 
 G_END_DECLS
 

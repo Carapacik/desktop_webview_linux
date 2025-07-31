@@ -182,13 +182,12 @@ static void desktop_webview_linux_plugin_init(DesktopWebviewLinuxPlugin * self) 
 
 static void method_call_cb(FlMethodChannel *channel, FlMethodCall *method_call,
                            gpointer user_data) {
-    auto *plugin = DESKTOP_WEBVIEW_LINUX_PLUGIN(user_data);
+    DesktopWebviewLinuxPlugin * plugin = DESKTOP_WEBVIEW_LINUX_PLUGIN(user_data);
     desktop_webview_linux_plugin_handle_method_call(plugin, method_call);
 }
 
 void desktop_webview_linux_plugin_register_with_registrar(FlPluginRegistrar *registrar) {
     client_message_channel_plugin_register_with_registrar(registrar);
-
     DesktopWebviewLinuxPlugin * plugin = DESKTOP_WEBVIEW_LINUX_PLUGIN(
             g_object_new(desktop_webview_linux_plugin_get_type(), nullptr));
 
