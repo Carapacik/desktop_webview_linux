@@ -17,7 +17,9 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Required to show webview title bar
-  if (runWebViewTitleBarWidget(args)) return;
+  if (!kIsWeb && Platform.isLinux && runWebViewTitleBarWidget(args)) {
+    return;
+  }
 
   runApp(MyApp());
 }
@@ -25,7 +27,7 @@ void main(List<String> args) async {
 ### Launch the WebView
 ```dart
 final webview = await WebviewWindow.create();
-webview.launch("https://example.com");
+webview.launch('https://example.com');
 ```
 
 ## Linux dependencies
